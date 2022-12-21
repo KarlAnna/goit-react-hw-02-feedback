@@ -1,7 +1,12 @@
-export const App = () => {
+import React from 'react'
+import Feedback from './Feedback'
+
+const App = () => {
   return (
-    <div>
-      React homework template
-    </div>
-  );
-};
+    <>
+      <Feedback />
+    </>
+  )
+}
+
+export default App;
