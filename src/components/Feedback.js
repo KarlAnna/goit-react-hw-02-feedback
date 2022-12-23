@@ -9,26 +9,33 @@ const feedbackMap = [
 ]
 
 class Feedback extends Component {
+    constructor() {
+        super()
+        this.total = 0
+        this.positivePercent = 0
+    }
+
     state = {
         good: 0,
         neutral: 0,
         bad: 0
-    };
+    }
 
     handleClick = (e) => {
         const { name } = e.target
-        this.setState(prevState => ({
-            [name]: prevState[name] + 1
-        }))
+        this.setState({ [name]: this.state[name] + 1 }, () => {
+            this.countTotalFeedback()
+            this.countPositiveFeedbackPercentage()
+        })
     }
 
-    // countTotalFeedback() {
-    
-    // }
+    countTotalFeedback = () => {
+        this.total = Object.values(this.state).reduce((acc, currentValue) => acc + currentValue, 0)
+    }
 
-    // countPositiveFeedbackPercentage() {
-
-    // }
+    countPositiveFeedbackPercentage = () => {
+        this.positivePercent = (this.state.good / this.total) * 100
+    }
 
     
     render() {
@@ -53,10 +60,10 @@ class Feedback extends Component {
                     <p>Bad: {this.state.bad}</p>
                 </li>
                 <li>
-                    <p>Total: 0</p>
+                    <p>Total: {this.total}</p>
                 </li>
                 <li>
-                    <p>Positive feedback: 0</p>
+                    <p>Positive feedback: {this.positivePercent}%</p>
                 </li>
             </ul>
             </div>
