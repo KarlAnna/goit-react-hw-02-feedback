@@ -7,3 +7,7 @@ ul {
     flex-direction: row;
     gap: 18px;
 }
+
+h2 {
+    padding: 8px;
+}
